@@ -1,11 +1,7 @@
 // src/pages/Contact.jsx
 import React from 'react';
+import ContactForm from '../components/ContactForm';
 
 export default function Contact() {
-  return (
-    <div className="container py-5">
-      <h1>Contact</h1>
-      <p>The booking/contact form will go here.</p>
-    </div>
-  );
+  return <ContactForm />;
 }
