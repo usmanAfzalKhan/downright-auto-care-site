@@ -7,12 +7,22 @@ export default function Header() {
   return (
     <>
       <style>{`
-        /* Brand: logo + text */
-        .navbar-brand {
+        /* keep the two-line brand text left-aligned */
+        .brand-text {
           display: flex;
-          align-items: center;
-          gap: 0.5rem;
+          flex-direction: column;
+          margin-left: 0.5rem;
+          text-align: left;
         }
+
+        /* container flex so logo/brand on left, toggler on right */
+        .navbar .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: baseline;
+        }
+
+        /* logo hover effects */
         .logo-img {
           transition: transform 0.3s ease, filter 0.3s ease;
           cursor: pointer;
@@ -28,23 +38,14 @@ export default function Header() {
           outline: 2px solid #ffcc00;
           outline-offset: 2px;
         }
-
-        /* Company name styling */
-        .brand-text {
-          font-family: 'YourFontName', sans-serif;
-          font-weight: 700;
-          font-size: 1.25rem; /* adjust as needed */
-          color: #000;        /* or whatever your header text color is */
-          line-height: 1;
-          white-space: nowrap;
-        }
       `}</style>
 
       <header>
-        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <nav className="navbar navbar-expand-lg bg-transparent">
           <div className="container">
-            {/* Logo + Company Name */}
-            <Link to="/" className="navbar-brand p-0">
+
+            {/* Logo + two-line brand text (flush left) */}
+            <Link to="/" className="navbar-brand d-flex align-items-center p-0">
               <img
                 src={logo}
                 alt="Downright Auto Care"
@@ -52,10 +53,13 @@ export default function Header() {
                 height={60}
                 className="logo-img"
               />
-              <span className="brand-text">Downright Auto Care</span>
+              <div className="brand-text">
+                <span>Downright Auto</span>
+                <span>Care</span>
+              </div>
             </Link>
 
-            {/* Mobile toggle */}
+            {/* Hamburger toggle (flush right) */}
             <button
               className="navbar-toggler"
               type="button"
@@ -68,9 +72,9 @@ export default function Header() {
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            {/* Nav links */}
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav ms-auto">
+            {/* Collapsed menu slides in under toggler, right-aligned */}
+            <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+              <ul className="navbar-nav">
                 <li className="nav-item">
                   <NavLink end to="/" className="nav-link">Home</NavLink>
                 </li>
@@ -88,6 +92,7 @@ export default function Header() {
                 </li>
               </ul>
             </div>
+
           </div>
         </nav>
       </header>
