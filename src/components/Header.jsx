@@ -7,22 +7,18 @@ export default function Header() {
   return (
     <>
       <style>{`
-        /* keep the two-line brand text left-aligned */
+        .navbar {
+          align-items: center;
+        }
+        .container-fluid {
+          padding: 0;
+        }
         .brand-text {
           display: flex;
           flex-direction: column;
           margin-left: 0.5rem;
           text-align: left;
         }
-
-        /* container flex so logo/brand on left, toggler on right */
-        .navbar .container {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-        }
-
-        /* logo hover effects */
         .logo-img {
           transition: transform 0.3s ease, filter 0.3s ease;
           cursor: pointer;
@@ -35,61 +31,68 @@ export default function Header() {
         .logo-img:active {
           transform: scale(0.95);
           filter: drop-shadow(0 0 12px rgba(255, 204, 0, 1));
-          outline: 2px solid #ffcc00;
-          outline-offset: 2px;
         }
+          /* hide the default dropdown caret */
+.dropdown-toggle::after {
+  display: none !important;
+}
       `}</style>
 
       <header>
         <nav className="navbar navbar-expand-lg bg-transparent">
-          <div className="container">
+          <div className="container-fluid d-flex justify-content-between">
 
-            {/* Logo + two-line brand text (flush left) */}
+            {/* Brand (logo + two-line text) */}
             <Link to="/" className="navbar-brand d-flex align-items-center p-0">
-              <img
-                src={logo}
-                alt="Downright Auto Care"
-                width={60}
-                height={60}
-                className="logo-img"
-              />
+              <img src={logo}
+                   alt="Downright Auto Care"
+                   width={60}
+                   height={60}
+                   className="logo-img" />
               <div className="brand-text">
                 <span>Downright Auto</span>
                 <span>Care</span>
               </div>
             </Link>
 
-            {/* Hamburger toggle (flush right) */}
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+            {/* Desktop nav: hidden on small */}
+            <ul className="navbar-nav d-none d-lg-flex">
+              {['/', '/about', '/services', '/reviews', '/contact'].map((path, i) => {
+                const label = ['Home','About','Services','Reviews','Contact'][i];
+                return (
+                  <li className="nav-item" key={label}>
+                    <NavLink to={path} className="nav-link">{label}</NavLink>
+                  </li>
+                )
+              })}
+            </ul>
 
-            {/* Collapsed menu slides in under toggler, right-aligned */}
-            <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <NavLink end to="/" className="nav-link">Home</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/about" className="nav-link">About</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/services" className="nav-link">Services</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/reviews" className="nav-link">Reviews</NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink to="/contact" className="nav-link">Contact</NavLink>
-                </li>
+            {/* Mobile dropdown: only on small */}
+            <div className="dropdown d-lg-none">
+              <button
+                className="btn btn-light dropdown-toggle"
+                type="button"
+                id="mobileMenuBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <ul
+                className="dropdown-menu dropdown-menu-end p-2"
+                aria-labelledby="mobileMenuBtn"
+                style={{ minWidth: '8rem' }}
+              >
+                {['Home','About','Services','Reviews','Contact'].map(label => (
+                  <li key={label}>
+                    <NavLink
+                      to={ label === 'Home' ? '/' : `/${label.toLowerCase()}` }
+                      className="dropdown-item"
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </div>
 
