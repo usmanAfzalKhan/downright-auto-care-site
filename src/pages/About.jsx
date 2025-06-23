@@ -1,11 +1,16 @@
 // src/pages/About.jsx
 import React from 'react';
 
+import AboutInfo from '../components/AboutInfo';
+import WhyChoose from '../components/WhyChoose';
+import BeforeAfterGallery from '../components/BeforeAfterGallery';
+
 export default function About() {
   return (
-    <div className="container py-5">
-      <h1>About</h1>
-      <p>Info about Downright Auto Care goes here.</p>
-    </div>
+    <>
+      <AboutInfo />
+      <WhyChoose />
+      <BeforeAfterGallery />
+    </>
   );
 }
