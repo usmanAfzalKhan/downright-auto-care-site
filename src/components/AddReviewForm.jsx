@@ -10,20 +10,17 @@ export default function AddReviewForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || stars < 1 || !text.trim()) {
-      return; // simple guard; you can show an error message here
-    }
-    // TODO: call your Netlify function to write to Firestore
-    // await fetch('/.netlify/functions/submitReview', { ... })
-
+    if (!name.trim() || stars < 1 || !text.trim()) return;
+    // TODO: actually send to your backend
     setSubmitted(true);
   };
 
+  // initial “Add a Review” button
   if (!showForm) {
     return (
-      <div className="container py-5 text-center">
+      <div className="text-center mt-4">
         <button
-          className="btn btn-outline-primary"
+          button type="submit" className="btn btn-outline-warning btn-lg"
           onClick={() => setShowForm(true)}
         >
           Add a Review
@@ -32,20 +29,21 @@ export default function AddReviewForm() {
     );
   }
 
+  // once clicked, show the form
   return (
     <section className="add-review py-5">
       <div className="container">
         {submitted ? (
-          <div className="alert alert-success">
+          <div className="alert alert-success text-center">
             Thanks! Your review has been submitted.
           </div>
         ) : (
           <>
-            <h3 className="mb-4">Add a Review</h3>
+            <h3 className="text-center mb-4">Add a Review</h3>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="review-name" className="form-label">
-                  Name<span className="text-danger">*</span>
+                  Name <span className="text-danger">*</span>
                 </label>
                 <input
                   id="review-name"
@@ -56,27 +54,29 @@ export default function AddReviewForm() {
                   required
                 />
               </div>
-
               <div className="mb-3">
                 <label className="form-label">
-                  Rating<span className="text-danger">*</span>
+                  Rating <span className="text-danger">*</span>
                 </label>
                 <div>
                   {[1, 2, 3, 4, 5].map((i) => (
                     <span
                       key={i}
                       onClick={() => setStars(i)}
-                      style={{ cursor: 'pointer', fontSize: '1.5rem', color: i <= stars ? '#ffc107' : '#e4e5e9' }}
+                      style={{
+                        cursor: 'pointer',
+                        fontSize: '1.5rem',
+                        color: i <= stars ? '#ffc107' : '#e4e5e9'
+                      }}
                     >
                       &#9733;
                     </span>
                   ))}
                 </div>
               </div>
-
               <div className="mb-3">
                 <label htmlFor="review-text" className="form-label">
-                  Review<span className="text-danger">*</span>
+                  Review <span className="text-danger">*</span>
                 </label>
                 <textarea
                   id="review-text"
@@ -87,8 +87,7 @@ export default function AddReviewForm() {
                   required
                 />
               </div>
-
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-outline-warning btn-lg">
                 Submit Review
               </button>
             </form>

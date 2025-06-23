@@ -7,8 +7,9 @@ export default function Header() {
   return (
     <>
       <style>{`
-        .navbar {
+        header, .navbar {
           align-items: center;
+          border-bottom: 2px solid rgba(0,0,0,0.1);
         }
         .container-fluid {
           padding: 0;
@@ -32,10 +33,10 @@ export default function Header() {
           transform: scale(0.95);
           filter: drop-shadow(0 0 12px rgba(255, 204, 0, 1));
         }
-          /* hide the default dropdown caret */
-.dropdown-toggle::after {
-  display: none !important;
-}
+        /* hide bootstrap dropdown caret */
+        .dropdown-toggle::after {
+          display: none !important;
+        }
       `}</style>
 
       <header>
@@ -44,30 +45,34 @@ export default function Header() {
 
             {/* Brand (logo + two-line text) */}
             <Link to="/" className="navbar-brand d-flex align-items-center p-0">
-              <img src={logo}
-                   alt="Downright Auto Care"
-                   width={60}
-                   height={60}
-                   className="logo-img" />
+              <img
+                src={logo}
+                alt="Downright Auto Care"
+                width={60}
+                height={60}
+                className="logo-img"
+              />
               <div className="brand-text">
                 <span>Downright Auto</span>
                 <span>Care</span>
               </div>
             </Link>
 
-            {/* Desktop nav: hidden on small */}
+            {/* Desktop nav */}
             <ul className="navbar-nav d-none d-lg-flex">
-              {['/', '/about', '/services', '/reviews', '/contact'].map((path, i) => {
-                const label = ['Home','About','Services','Reviews','Contact'][i];
-                return (
-                  <li className="nav-item" key={label}>
-                    <NavLink to={path} className="nav-link">{label}</NavLink>
-                  </li>
-                )
-              })}
+              {['Home','About','Services','Reviews','Contact'].map(label => (
+                <li className="nav-item" key={label}>
+                  <NavLink
+                    to={ label === 'Home' ? '/' : `/${label.toLowerCase()}` }
+                    className="nav-link"
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
 
-            {/* Mobile dropdown: only on small */}
+            {/* Mobile dropdown */}
             <div className="dropdown d-lg-none">
               <button
                 className="btn btn-light dropdown-toggle"

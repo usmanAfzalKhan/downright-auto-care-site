@@ -3,16 +3,12 @@ import React from 'react';
 
 export default function WhyChoose() {
   return (
-    <section className="why-choose py-5 bg-light">
+    <section className="why-choose py-5">
       <div className="container">
         <h2>Why Choose Downright Auto Care?</h2>
-        <ul>
-          <li>Competitive pricing without compromising quality</li>
-          <li>Certified technicians with years of experience</li>
-          <li>Eco-friendly, non-toxic cleaning solutions</li>
-          <li>Mobile service available at your doorstep</li>
-          <li>Satisfaction guaranteed on every job</li>
-        </ul>
+        <p>
+          Competitive pricing without compromising quality. Certified technicians with years of experience. Eco-friendly, non-toxic cleaning solutions. Mobile service available at your doorstep. Satisfaction guaranteed on every job.
+        </p>
       </div>
     </section>
   );

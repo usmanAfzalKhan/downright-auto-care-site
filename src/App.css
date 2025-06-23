@@ -1,10 +1,56 @@
+/* src/App.css */
+
+/* Global background and text color */
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    rgba(160, 11, 30, 0.9) 0%,
+    rgba(43, 43, 43, 0.9) 100%
+  );
+  color: #ffffff;
+}
+
+/* Ensure all text everywhere is white */
+body *,
+body *::before,
+body *::after {
+  color: #ffffff !important;
+}
+
+/* Center your app content and constrain width */
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
+/* Full-width header and footer */
+header,
+footer {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  box-sizing: border-box;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Header bottom border */
+header {
+  border-bottom: 2px solid #ffffff;
+}
+
+/* Footer top border */
+footer {
+  border-top: 2px solid #ffffff;
+}
+
+/* Logo hover effects */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -18,25 +64,191 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* Card padding */
 .card {
   padding: 2em;
 }
 
-.read-the-docs {
-  color: #888;
+/* Remove default dropdown caret if you’d added it */
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+/* Highlight active nav item */
+.navbar .nav-link.active,
+.dropdown-item.active {
+  color: #ffcc00 !important;
+}
+
+/* give the brand a little breathing room on the left */
+.navbar-brand {
+  margin-left: 1rem;
+}
+
+/* give the hamburger a little breathing room on the right */
+.navbar-toggler {
+  margin-left: 1rem;
+}
+
+/* push the hamburger in from the right edge */
+header .navbar-toggler {
+  margin-right: 1rem !important;
+}
+
+header.navbar  
+  .navbar-toggler {
+    margin-right: 1rem !important;
+}
+
+header .navbar {
+  padding: 0 1rem;
+}
+
+/* match the site background color */
+.navbar-toggler {
+  background-color: rgba(160, 11, 30, 0.9) !important;
+}
+
+.dropdown-menu {
+  background-color: rgba(160, 11, 30, 0.9) !important;
+}
+
+/* funnel the same matte-red→charcoal gradient into the toggle button */
+.navbar-toggler {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 11, 30, 0.9) 0%,
+    rgba(43, 43, 43, 0.9) 100%
+  ) !important;
+  border: 1px solid #fff !important;  /* keep your white outline */
+}
+
+/* make the “three bars” icon white (it’s an svg under the hood) */
+.navbar-toggler-icon {
+  filter: invert(1) brightness(1.3) !important;
+}
+
+/* and the little dropdown panel that pops out too */
+.dropdown-menu {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 11, 30, 0.9) 0%,
+    rgba(43, 43, 43, 0.9) 100%
+  ) !important;
+  border: 1px solid #fff !important;
+}
+
+/* make the “hamburger” bars red instead of white */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ff0000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+/* make the toggle “button” itself red */
+.navbar-toggler {
+  background-color: rgba(160, 11, 30, 0.9) !important;
+  border: none !important;
+}
+
+/* redraw the three bars in white */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 30 30'xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23ffffff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+}
+
+/* make the toggler button pick up your matte-red→charcoal gradient */
+.navbar-toggler {
+  background: linear-gradient(
+    135deg,
+    rgba(160, 11, 30, 0.9) 0%,
+    rgba(43, 43, 43, 0.9) 100%
+  ) !important;
+  border: 1px solid #fff !important;
+}
+
+/* remove any stray white btn-light styles */
+.navbar-toggler.btn-light {
+  background: inherit !important;
+  border: none !important;
+}
+
+/* ensure the icon itself is transparent so the gradient shows through */
+.navbar-toggler-icon {
+  background-color: transparent !important;
+  filter: invert(1) brightness(1.3) !important;
+}
+
+/* if you’re using a dropdown-toggle class on that same button */
+.dropdown-toggle {
+  background: inherit !important;
+  border: none !important;
+}
+
+/* force the hamburger icon to three white bars */
+.navbar-toggler-icon {
+  /* replace whatever was there with a white-bar SVG */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23fff' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E") !important;
+  background-size: 1.5em 1.5em;
+  filter: none !important;  /* wipe out any previous invert/brightness */
+}
+
+/* custom hover state for mobile dropdown items */
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+}
+
+/* spin the logo like a slow wheel */
+@keyframes wheel-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.logo-img {
+  transform-origin: center center !important;
+  animation: wheel-spin 10s linear infinite !important;
+}
+
+/* undo Bootstrap’s white bg */
+.why-choose.bg-light,
+.before-after-gallery.bg-light {
+  background-color: transparent !important;
+}
+
+/* service cards: darken & add a thin white border */
+.service-grid .card {
+  background: rgba(160, 11, 30, 0.6) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+}
+
+/* make the “View Details” button pop */
+.service-grid .btn-outline-primary {
+  border-color: #ffcc00 !important;
+  color: #ffcc00 !important;
+  background: transparent !important;
+  transition: background 200ms, color 200ms;
+}
+
+/* on hover, fill with yellow and dark text */
+.service-grid .btn-outline-primary:hover {
+  background: #ffcc00 !important;
+  color: #2b2b2b !important;
+}
+
+/* on active/click, a slightly darker yellow */
+.service-grid .btn-outline-primary:active {
+  background: #e6b800 !important;
+  color: #2b2b2b !important;
+}
+
+/* Override bootstrap so btn-warning is always filled yellow */
+.btn-warning {
+  background-color: #ffcc00 !important;
+  border-color: #ffcc00 !important;
+  color: #2b2b2b !important;
+}
+
+/* On hover, darken just a touch */
+.btn-warning:hover {
+  background-color: #e6b800 !important;
+  border-color: #e6b800 !important;
 }
