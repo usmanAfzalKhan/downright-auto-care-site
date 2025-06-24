@@ -4,13 +4,15 @@
 body {
   margin: 0;
   min-height: 100vh;
+  /* dark slate → near-black gradient */
   background: linear-gradient(
     135deg,
-    rgba(160, 11, 30, 0.9) 0%,
-    rgba(43, 43, 43, 0.9) 100%
+    #1f2937 0%,   /* slate gray */
+    #0f172a 100%  /* almost black */
   );
-  color: #ffffff;
+  color: #e2e8f0; /* soft off-white for better contrast */
 }
+
 
 /* Ensure all text everywhere is white */
 body *,
@@ -106,11 +108,11 @@ header .navbar {
 
 /* match the site background color */
 .navbar-toggler {
-  background-color: rgba(160, 11, 30, 0.9) !important;
+  background-color: 0f172a
 }
 
 .dropdown-menu {
-  background-color: rgba(160, 11, 30, 0.9) !important;
+  background-color: #0f172a;
 }
 
 /* funnel the same matte-red→charcoal gradient into the toggle button */
@@ -128,15 +130,16 @@ header .navbar {
   filter: invert(1) brightness(1.3) !important;
 }
 
-/* and the little dropdown panel that pops out too */
+/* mobile menu panel = dark-slate gradient to match page background */
 .dropdown-menu {
   background: linear-gradient(
     135deg,
-    rgba(160, 11, 30, 0.9) 0%,
-    rgba(43, 43, 43, 0.9) 100%
+    #1f2937 0%,
+    #0f172a 100%
   ) !important;
-  border: 1px solid #fff !important;
+  border: 1px solid #ffffff !important; /* keep your white outline */
 }
+
 
 /* make the “hamburger” bars red instead of white */
 .navbar-toggler-icon {
@@ -206,6 +209,7 @@ header .navbar {
 .logo-img {
   transform-origin: center center !important;
   animation: wheel-spin 10s linear infinite !important;
+  margin-top: -0.75rem;
 }
 
 /* undo Bootstrap’s white bg */
@@ -216,8 +220,7 @@ header .navbar {
 
 /* service cards: darken & add a thin white border */
 .service-grid .card {
-  background: rgba(160, 11, 30, 0.6) !important;
-  border: 1px solid rgba(255,255,255,0.3) !important;
+  background: #0f172a
 }
 
 /* make the “View Details” button pop */
