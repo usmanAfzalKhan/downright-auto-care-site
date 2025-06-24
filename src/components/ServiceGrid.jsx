@@ -1,33 +1,29 @@
-// src/components/ServiceGrid.jsx
-import React from 'react';
-
-const services = [
-  'Exterior Wash',
-  'Interior Detailing',
-  'Ceramic Coating',
-  'Engine Bay Cleaning',
-  'Headlight Restoration',
-  'Pet Hair Removal',
-];
+import React from 'react'
+import { Link } from 'react-router-dom'
+import services from '../data/services'
 
 export default function ServiceGrid() {
   return (
     <section className="service-grid py-5">
       <div className="container">
-        <h2 className="mb-4">Our Services</h2>
+        <h2 className="mb-4 text-center">Our Services</h2>
         <div className="row g-4">
-          {services.map((svc, i) => (
-            <div key={i} className="col-12 col-md-6 col-lg-4">
+          {services.map(svc => (
+            <div key={svc.slug} className="col-12 col-md-6 col-lg-4">
               <div className="card h-100 text-center">
+                {/* placeholder for future image */}
                 <div
                   className="card-img-top bg-secondary placeholder"
                   style={{ height: '180px' }}
                 />
-                <div className="card-body">
-                  <h5 className="card-title">{svc}</h5>
-                  <button className="btn btn-outline-primary mt-2">
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{svc.name}</h5>
+                  <Link
+                    to={`/services/${svc.slug}`}
+                    className="btn btn-outline-primary mt-auto"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -35,5 +31,5 @@ export default function ServiceGrid() {
         </div>
       </div>
     </section>
-  );
+  )
 }
