@@ -1,6 +1,8 @@
-import React from 'react'
-import ServiceGrid from '../components/ServiceGrid'
+import React from "react";
+import ServiceGrid from "../components/ServiceGrid";
 
-export default function Services() {
-  return <ServiceGrid />
+function Services() {
+  return <ServiceGrid />;
 }
+
+export default Services;
