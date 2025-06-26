@@ -9,8 +9,6 @@ export default function Home() {
       <HeroSlider />
       <OffersRow />
       <IntroText />
-      <h1>Home</h1>
-      <p>Welcome to Downright Auto Care!</p>
     </div>
   );
 }

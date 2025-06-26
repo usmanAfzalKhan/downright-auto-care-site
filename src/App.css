@@ -624,3 +624,21 @@ header .navbar {
   border-radius: 4px;
   pointer-events: auto;
 }
+
+/* Offer Card Hover Effect */
+.offer-card {
+  transition: border 0.19s, box-shadow 0.17s, transform 0.17s;
+  border: 1.2px solid transparent;
+  background: #191e2a;
+  box-shadow: 0 2px 14px rgba(22,33,50,0.09);
+}
+.offer-card:hover, .offer-card:focus-within {
+  border: 1.7px solid #FFD600 !important;
+  box-shadow: 0 6px 22px rgba(255, 214, 0, 0.12), 0 2px 14px rgba(22,33,50,0.14);
+  transform: translateY(-3px) scale(1.02);
+  z-index: 1;
+}
+.offer-card:active {
+  transform: scale(0.97);
+  box-shadow: 0 2px 14px rgba(22,33,50,0.09);
+}
