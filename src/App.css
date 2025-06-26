@@ -561,7 +561,7 @@ header .navbar {
 .responsive-video-wrapper {
   width: 100%;
   max-width: 740px;
-  margin: 0 auto;
+  margin: 0 auto 1.2rem auto;    /* 1.2rem bottom margin between wrappers */
   aspect-ratio: 16 / 9;
   background: #232936;
   border-radius: 16px;
@@ -571,13 +571,18 @@ header .navbar {
   align-items: center;
   justify-content: center;
 }
+.responsive-video-wrapper:last-child {
+  margin-bottom: 0;
+}
 .responsive-video-wrapper video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   background: #232936;
   border-radius: 16px;
+  /* Remove margin-top for even stacking */
 }
+
 
 /* ZOOM FLOAT (for image modal) */
 .zoom-float-box {

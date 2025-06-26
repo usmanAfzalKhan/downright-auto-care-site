@@ -292,6 +292,14 @@ export default function AboutPortfolioPage() {
               style={{ borderRadius: "16px", boxShadow: "0 6px 32px rgba(22,33,50,0.17)" }}
             />
           </div>
+          <div className="responsive-video-wrapper">
+            <video
+              src="/videos/video7.mp4"
+              controls
+              playsInline
+              style={{ borderRadius: "16px", boxShadow: "0 6px 32px rgba(22,33,50,0.17)" }}
+            />
+          </div>
         </div>
       </section>
     </>
