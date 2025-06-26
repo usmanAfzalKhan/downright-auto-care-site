@@ -59,11 +59,12 @@
   }
 }
 
+/* === ARROWS (UPDATED) === */
 .slider-btn {
   position: absolute;
-  top: 50%;
+  top: 32%; /* Moved higher (was 50%) */
   z-index: 2;
-  background: rgba(35, 41, 54, 0.7); /* matches your card/navy, semi-transparent */
+  background: rgba(35, 41, 54, 0.32); /* More transparent background */
   color: #FFD600; /* luxury yellow accent */
   border: none;
   border-radius: 50%;
@@ -86,7 +87,7 @@
   left: auto;
 }
 .slider-btn:hover, .slider-btn:focus {
-  background: rgba(35, 41, 54, 0.95);
+  background: rgba(35, 41, 54, 0.13); /* Even more transparent on hover */
   outline: none;
 }
 @media (max-width: 576px) {
@@ -94,7 +95,7 @@
     width: 36px;
     height: 36px;
     font-size: 1.5rem;
-    top: 50%;
+    top: 32%;
     transform: translateY(-50%);
   }
   .slider-btn.left {
