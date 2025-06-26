@@ -11,6 +11,9 @@ const galleryImages = [
   "/images/recent7.jpeg",
   "/images/recent8.jpeg",
   "/images/recent9.jpeg",
+  "/images/recent10.jpeg",
+  "/images/recent11.jpeg",
+  "/images/recent12.jpeg",
 ];
 
 // Images for Before/After Gallery (always in pairs)
