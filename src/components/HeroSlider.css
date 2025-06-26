@@ -58,3 +58,71 @@
     font-size: 1rem;
   }
 }
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  background: rgba(35, 41, 54, 0.7); /* matches your card/navy, semi-transparent */
+  color: #FFD600; /* luxury yellow accent */
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.slider-btn.left {
+  left: 24px;
+  right: auto;
+}
+.slider-btn.right {
+  right: 24px;
+  left: auto;
+}
+.slider-btn:hover, .slider-btn:focus {
+  background: rgba(35, 41, 54, 0.95);
+  outline: none;
+}
+@media (max-width: 576px) {
+  .slider-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .slider-btn.left {
+    left: 8px;
+    right: auto;
+  }
+  .slider-btn.right {
+    right: 8px;
+    left: auto;
+  }
+}
+
+.hero-logo-overlay {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  width: 90px;
+  height: 90px;
+  z-index: 3;
+  opacity: 0.96;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.3));
+}
+
+@media (max-width: 900px) {
+  .hero-logo-overlay {
+    width: 54px;
+    height: 54px;
+    right: 14px;
+    bottom: 14px;
+  }
+}
