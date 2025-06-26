@@ -26,6 +26,49 @@ export default function AboutPortfolioPage() {
   const [zoomType, setZoomType] = useState(null); // 'beforeafter' or 'recentwork'
   const zoomBoxRef = useRef(null);
 
+  // ---- SWIPE HANDLING ----
+  const [touchStartX, setTouchStartX] = useState(null);
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+  const handleTouchEnd = (e) => {
+    if (touchStartX === null) return;
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchEndX - touchStartX;
+    const threshold = 50; // px required to trigger swipe
+
+    if (zoomImg && Math.abs(diff) > threshold) {
+      if (zoomType === "beforeafter" && zoomIdx !== null) {
+        if (diff > 0) {
+          // Swipe right (previous)
+          const prevIdx = (zoomIdx - 1 + images.length) % images.length;
+          setZoomIdx(prevIdx);
+          setZoomImg(images[prevIdx].src);
+        } else {
+          // Swipe left (next)
+          const nextIdx = (zoomIdx + 1) % images.length;
+          setZoomIdx(nextIdx);
+          setZoomImg(images[nextIdx].src);
+        }
+      }
+      if (zoomType === "recentwork" && zoomIdx !== null) {
+        if (diff > 0) {
+          // Swipe right (previous)
+          const prevIdx = (zoomIdx - 1 + galleryImages.length) % galleryImages.length;
+          setZoomIdx(prevIdx);
+          setZoomImg(galleryImages[prevIdx]);
+        } else {
+          // Swipe left (next)
+          const nextIdx = (zoomIdx + 1) % galleryImages.length;
+          setZoomIdx(nextIdx);
+          setZoomImg(galleryImages[nextIdx]);
+        }
+      }
+    }
+    setTouchStartX(null);
+  };
+  // ---- END SWIPE HANDLING ----
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (!zoomImg) return;
@@ -141,6 +184,8 @@ export default function AboutPortfolioPage() {
               className="zoom-float-img"
               style={{ maxWidth: "90vw", maxHeight: "90vh", borderRadius: "16px" }}
               onClick={e => e.stopPropagation()}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
             />
             <button className="zoom-close-btn" onClick={() => {
               setZoomImg(null);
