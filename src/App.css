@@ -446,3 +446,176 @@ header .navbar {
 .card-luxury-bg {
   background: #0c1527 !important;   /* Elegant, luxurious navy/charcoal */
 }
+
+.zoom-float-box {
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;   /* Don't block site */
+}
+
+.zoom-float-img {
+  box-shadow: 0 8px 40px rgba(22,33,50,0.20);
+  background: #232936cc;
+  pointer-events: auto;
+  cursor: zoom-out;
+  transition: transform 0.22s;
+  /* Optionally add a slight scale-in for effect */
+  animation: zoomIn 0.22s;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.90);}
+  to { transform: scale(1);}
+}
+
+.zoom-close-btn {
+  position: absolute;
+  top: 1vw;
+  right: 2vw;
+  background: none;
+  border: none;
+  color: #FFD600;
+  font-size: 2.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  text-shadow: 0 2px 8px #162132, 0 0 3px #232936;
+  padding: 0 10px 3px 10px;
+  border-radius: 4px;
+  pointer-events: auto;
+}
+
+.responsive-video-wrapper {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #232936;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(22,33,50,0.11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.responsive-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #232936;
+  border-radius: 16px;
+}
+
+/* For Before & After images */
+.before-after-img-box {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #232936;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border 0.18s;
+  border: 1.2px solid transparent;
+}
+.before-after-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;    /* << changed from cover to contain */
+  object-position: center;
+  background: #232936;
+}
+.before-after-img-box:hover,
+.before-after-img-box:focus-within {
+  border: 1.2px solid #FFD600 !important;
+}
+
+
+/* For Recent Work Gallery images */
+.gallery-img-box {
+  background: #232936;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(22,33,50,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+  height: 100%;
+  border: 1.2px solid transparent;
+  transition: border 0.18s;
+}
+.gallery-img-box:hover,
+.gallery-img-box:focus-within {
+  border: 1.2px solid #FFD600 !important;
+}
+
+
+/* VIDEO WRAPPER */
+.responsive-video-wrapper {
+  width: 100%;
+  max-width: 740px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #232936;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(22,33,50,0.11);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.responsive-video-wrapper video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #232936;
+  border-radius: 16px;
+}
+
+/* ZOOM FLOAT (for image modal) */
+.zoom-float-box {
+  position: fixed;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* ALLOW pointer events so user can click background to close */
+  pointer-events: auto;
+  cursor: pointer;
+}
+.zoom-float-img {
+  box-shadow: 0 8px 40px rgba(22,33,50,0.20);
+  background: #232936cc;
+  pointer-events: auto;      /* This keeps image clickable for stopPropagation */
+  cursor: zoom-out;
+  transition: transform 0.22s;
+  animation: zoomIn 0.22s;
+}
+@keyframes zoomIn {
+  from { transform: scale(0.90);}
+  to { transform: scale(1);}
+}
+.zoom-close-btn {
+  position: absolute;
+  top: 1vw;
+  right: 2vw;
+  background: none;
+  border: none;
+  color: #FFD600;
+  font-size: 2.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+  text-shadow: 0 2px 8px #162132, 0 0 3px #232936;
+  padding: 0 10px 3px 10px;
+  border-radius: 4px;
+  pointer-events: auto;
+}

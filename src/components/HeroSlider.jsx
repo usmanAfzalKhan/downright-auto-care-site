@@ -73,14 +73,6 @@ export default function HeroSlider() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // auto-advance every 5s
-  useEffect(() => {
-    const id = setInterval(() => {
-      setIndex((i) => (i + 1) % slides.length);
-    }, 5000);
-    return () => clearInterval(id);
-  }, []);
-
   return (
     <div className="hero-slider">
       <button
