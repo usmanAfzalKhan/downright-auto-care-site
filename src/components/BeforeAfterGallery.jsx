@@ -8,6 +8,9 @@ const galleryImages = [
   "/images/recent2.jpeg",
   "/images/recent3.jpeg",
   "/images/recent5.jpeg",
+  "/images/recent7.jpeg",
+  "/images/recent8.jpeg",
+  "/images/recent9.jpeg",
 ];
 
 // Images for Before/After Gallery (always in pairs)
@@ -18,6 +21,14 @@ const images = [
   { label: 'After', src: '/images/after2.jpg' },
   { label: 'Before', src: '/images/before3.jpg' },
   { label: 'After', src: '/images/after3.jpg' },
+  { label: 'Before', src: '/images/before4.jpeg' },
+  { label: 'After', src: '/images/after4.jpeg' },
+  { label: 'Before', src: '/images/before5.jpeg' },
+  { label: 'After', src: '/images/after5.jpeg' },
+  { label: 'Before', src: '/images/before6.jpeg' },
+  { label: 'After', src: '/images/after6.jpeg' },
+  { label: 'Before', src: '/images/before7.jpeg' },
+  { label: 'After', src: '/images/after7.jpeg' },
 ];
 
 export default function AboutPortfolioPage() {
@@ -257,6 +268,22 @@ export default function AboutPortfolioPage() {
           <div className="responsive-video-wrapper">
             <video
               src="/videos/video4.mp4"
+              controls
+              playsInline
+              style={{ borderRadius: "16px", boxShadow: "0 6px 32px rgba(22,33,50,0.17)" }}
+            />
+          </div>
+          <div className="responsive-video-wrapper">
+            <video
+              src="/videos/video5.mp4"
+              controls
+              playsInline
+              style={{ borderRadius: "16px", boxShadow: "0 6px 32px rgba(22,33,50,0.17)" }}
+            />
+          </div>
+          <div className="responsive-video-wrapper">
+            <video
+              src="/videos/video6.mp4"
               controls
               playsInline
               style={{ borderRadius: "16px", boxShadow: "0 6px 32px rgba(22,33,50,0.17)" }}
