@@ -61,6 +61,11 @@ export default function ServiceDetail() {
   const navigate = useNavigate();
   const svc = services.find((s) => s.slug === slug) || {};
 
+  // scroll to top whenever this page mounts or slug changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [slug]);
+
   // detect mobile
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   useEffect(() => {
