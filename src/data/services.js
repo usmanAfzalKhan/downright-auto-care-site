@@ -6,11 +6,14 @@ const services = [
     name: "Exterior Wash",
     description: "Quick hand wash and dry to remove dirt, grime, and road film.",
     features: [
-      "Hand wash with pH-neutral shampoo",
-      "Air-dry or soft microfiber towel",
-      "Protective wax finish",
+      "Hand wash with premium pH-neutral shampoo",
+      "Gentle pre-rinse to loosen surface debris",
+      "Air-dry or soft microfiber towel finish",
+      "Wheel and tire cleaning with safe brushes",
+      "Streak-free glass and mirror wipe-down",
+      "Protective wax or sealant for a lasting shine"
     ],
-    pricing: { basic: 25, deluxe: 50 },
+    startingFrom: 50,
     imageDesktop: "/images/exterior-wash-desktop.png",
     imageMobile: "/images/exterior-wash-mobile.png"
   },
@@ -19,11 +22,15 @@ const services = [
     name: "Interior Detailing",
     description: "Complete vacuum, shampoo, and wipe-down of all surfaces. Leather conditioning upon request.",
     features: [
-      "Deep-vacuum & upholstery shampoo",
-      "Vinyl, leather & plastic wipe-down",
-      "Odor-eliminating treatment",
+      "Deep-vacuum on carpets, seats, and mats",
+      "Shampoo and extraction for upholstery & fabric",
+      "Full dashboard, console, and door panel cleaning",
+      "Leather surface treatment and conditioning",
+      "Stain and odor removal for a fresh interior",
+      "Steam cleaning of hard-to-reach areas",
+      "Crystal-clear window and glass polish"
     ],
-    pricing: { basic: 40, deluxe: 75 },
+    startingFrom: 130,
     imageDesktop: "/images/interior-detailing-desktop.png",
     imageMobile: "/images/interior-detailing-mobile.png"
   },
@@ -32,11 +39,15 @@ const services = [
     name: "Ceramic Coating",
     description: "Long-lasting protective ceramic coating to guard against UV, water spots, and contaminants.",
     features: [
-      "Surface decontamination",
-      "Ceramic coating application",
-      "Cure and inspection",
+      "Thorough wash and iron fallout removal",
+      "Full paint decontamination & clay bar treatment",
+      "Single- or multi-stage paint correction",
+      "Application of professional ceramic coating",
+      "Curing and bonding for maximum durability",
+      "Extreme water-beading and gloss enhancement",
+      "Protects against UV, dirt, salt, and bird droppings"
     ],
-    pricing: { basic: 199, deluxe: 299 },
+    startingFrom: 800,
     imageDesktop: "/images/ceramic-coating-desktop.png",
     imageMobile: "/images/ceramic-coating-mobile.png"
   },
@@ -45,11 +56,14 @@ const services = [
     name: "Clay Bar Treatment",
     description: "Gently removes bonded surface contaminants to leave your paint silky smooth and ready for wax or sealant.",
     features: [
-      "Eliminates industrial fallout & rail dust",
-      "Preps surface for protection layers",
-      "Restores glossy, glass-like finish",
+      "Surface wash to remove loose dirt and debris",
+      "Clay bar application to lift embedded contaminants",
+      "Eliminates tar, sap, brake dust, and industrial fallout",
+      "Improves paint clarity and slickness",
+      "Preparation for waxing or ceramic coating",
+      "Safe for all paint types and finishes"
     ],
-    pricing: { basic: 50, deluxe: 80 },
+    startingFrom: 100,
     imageDesktop: "/images/clay-bar-treatment-desktop.png",
     imageMobile: "/images/clay-bar-treatment-mobile.png"
   },
@@ -58,11 +72,14 @@ const services = [
     name: "Headlight Restoration",
     description: "Remove oxidation and yellowing, restoring clarity and night visibility.",
     features: [
-      "Lens sanding & polishing",
-      "UV-resistant sealant",
-      "Headlight alignment check",
+      "Progressive wet sanding to remove oxidation",
+      "High-speed machine polishing for clarity",
+      "Application of UV-resistant sealant",
+      "Restores brightness and beam focus",
+      "Enhances safety and curb appeal",
+      "Suitable for most makes and models"
     ],
-    pricing: { basic: 50, deluxe: 80 },
+    startingFrom: 60,
     imageDesktop: "/images/headlight-restoration-desktop.png",
     imageMobile: "/images/headlight-restoration-mobile.png"
   },
@@ -71,13 +88,16 @@ const services = [
     name: "Pet Hair Removal",
     description: "Specialized tools to lift and remove embedded pet hair from carpets and upholstery.",
     features: [
-      "Power vacuum & fur rake",
-      "Fabric brushing & lint removal",
-      "Optional deodorizer spray",
+      "Targeted vacuuming with pet hair attachments",
+      "Rubber and pumice brushes for stubborn fur",
+      "Lint rollers for fabric and carpeted areas",
+      "Compressed air for hard-to-reach spots",
+      "Full interior cleaning to restore freshness",
+      "Optional deodorizer to eliminate pet odors"
     ],
-    pricing: { basic: 30, deluxe: 45 },
+    startingFrom: null,
     imageDesktop: "/images/pet-hair-removal-desktop.png",
-    imageMobile: "/images/pet-hair-removal-mobile.png"    
+    imageMobile: "/images/pet-hair-removal-mobile.png"
   },
 ];
 

@@ -642,3 +642,21 @@ header .navbar {
   transform: scale(0.97);
   box-shadow: 0 2px 14px rgba(22,33,50,0.09);
 }
+
+/* For service detail/yellow buttons */
+.service-btn,
+.btn.btn-warning {
+  background: #FFD600;
+  color: #232936;
+  border: 1.6px solid #FFD600;
+  border-radius: 8px;
+  transition: background 0.16s, color 0.14s;
+  font-weight: 600;
+}
+.service-btn:hover,
+.btn.btn-warning:hover {
+  background: #232936;
+  color: #FFD600;
+  border: 1.6px solid #FFD600;
+}
+
