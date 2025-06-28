@@ -1,99 +1,127 @@
 // src/components/AddReviewForm.jsx
 import React, { useState } from 'react';
+import { db } from '../firebase';
+import {
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+  deleteDoc,
+  doc,
+  addDoc,
+  serverTimestamp
+} from 'firebase/firestore';
 
-export default function AddReviewForm() {
-  const [showForm, setShowForm] = useState(false);
-  const [name, setName] = useState('');
-  const [stars, setStars] = useState(0);
-  const [text, setText] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+export default function AddReviewForm({ onDone }) {
+  const [form, setForm] = useState({ name: '', stars: 5, text: '' });
+  const [submitting, setSubmitting] = useState(false);
+
+  const fieldStyle = {
+    backgroundColor: '#1a2032',
+    color: '#e1e8f0',
+    border: '1px solid #444',
+    borderRadius: '4px'
+  };
+  const placeholderStyle = { color: '#777' };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((f) => ({ ...f, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim() || stars < 1 || !text.trim()) return;
-    // TODO: actually send to your backend
-    setSubmitted(true);
+    setSubmitting(true);
+
+    const reviewsRef = collection(db, 'reviews');
+    const allSnap = await getDocs(reviewsRef);
+    if (allSnap.size >= 6) {
+      const oldestQ = query(reviewsRef, orderBy('createdAt','asc'), limit(1));
+      const oldestSnap = await getDocs(oldestQ);
+      oldestSnap.forEach(docSnap =>
+        deleteDoc(doc(db, 'reviews', docSnap.id))
+      );
+    }
+
+    await addDoc(reviewsRef, {
+      name: form.name,
+      stars: form.stars,
+      text: form.text,
+      createdAt: serverTimestamp()
+    });
+
+    setSubmitting(false);
+    onDone?.();
   };
 
-  // initial “Add a Review” button
-  if (!showForm) {
-    return (
-      <div className="text-center mt-4">
-        <button
-          button type="submit" className="btn btn-outline-warning btn-lg"
-          onClick={() => setShowForm(true)}
-        >
-          Add a Review
-        </button>
-      </div>
-    );
-  }
-
-  // once clicked, show the form
   return (
-    <section className="add-review py-5">
-      <div className="container">
-        {submitted ? (
-          <div className="alert alert-success text-center">
-            Thanks! Your review has been submitted.
-          </div>
-        ) : (
-          <>
-            <h3 className="text-center mb-4">Add a Review</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="review-name" className="form-label">
-                  Name <span className="text-danger">*</span>
-                </label>
-                <input
-                  id="review-name"
-                  type="text"
-                  className="form-control"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="mb-3">
-                <label className="form-label">
-                  Rating <span className="text-danger">*</span>
-                </label>
-                <div>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <span
-                      key={i}
-                      onClick={() => setStars(i)}
-                      style={{
-                        cursor: 'pointer',
-                        fontSize: '1.5rem',
-                        color: i <= stars ? '#ffc107' : '#e4e5e9'
-                      }}
-                    >
-                      &#9733;
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className="mb-3">
-                <label htmlFor="review-text" className="form-label">
-                  Review <span className="text-danger">*</span>
-                </label>
-                <textarea
-                  id="review-text"
-                  className="form-control"
-                  rows="4"
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn-outline-warning btn-lg">
-                Submit Review
-              </button>
-            </form>
-          </>
-        )}
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 rounded bg-dark text-light border"
+    >
+      <div className="mb-3">
+        <label className="form-label text-white">
+          Name<span className="text-danger">*</span>
+        </label>
+        <input
+          className="form-control"
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          required
+          style={fieldStyle}
+          placeholder="Your name"
+          disabled={submitting}
+        />
       </div>
-    </section>
+
+      <div className="mb-3">
+        <label className="form-label text-white">
+          Rating<span className="text-danger">*</span>
+        </label>
+        <select
+          className="form-select"
+          name="stars"
+          value={form.stars}
+          onChange={handleChange}
+          required
+          style={fieldStyle}
+          disabled={submitting}
+        >
+          {[5,4,3,2,1].map((n) => (
+            <option key={n} value={n} style={fieldStyle}>
+              {n} ★
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="mb-3">
+        <label className="form-label text-white">
+          Review<span className="text-danger">*</span>
+        </label>
+        <textarea
+          className="form-control"
+          name="text"
+          rows={3}
+          value={form.text}
+          onChange={handleChange}
+          required
+          style={fieldStyle}
+          placeholder="Your review"
+          disabled={submitting}
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="btn btn-outline-warning btn-lg"
+        disabled={submitting}
+      >
+        {submitting ? 'Submitting…' : 'Submit Review'}
+      </button>
+    </form>
   );
 }
