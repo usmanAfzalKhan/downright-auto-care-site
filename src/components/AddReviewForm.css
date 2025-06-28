@@ -1,0 +1,8 @@
+/* src/components/AddReviewForm.css */
+
+/* Make placeholders visible on dark backgrounds */
+input::placeholder,
+textarea::placeholder {
+  color: #777 !important;
+  opacity: 1 !important;
+}

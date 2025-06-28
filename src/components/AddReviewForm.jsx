@@ -1,5 +1,5 @@
-// src/components/AddReviewForm.jsx
 import React, { useState } from 'react';
+import './AddReviewForm.css';
 import { db } from '../firebase';
 import {
   collection,
@@ -23,7 +23,6 @@ export default function AddReviewForm({ onDone }) {
     border: '1px solid #444',
     borderRadius: '4px'
   };
-  const placeholderStyle = { color: '#777' };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,7 +35,8 @@ export default function AddReviewForm({ onDone }) {
 
     const reviewsRef = collection(db, 'reviews');
     const allSnap = await getDocs(reviewsRef);
-    if (allSnap.size >= 6) {
+
+    if (allSnap.size >= 8) {
       const oldestQ = query(reviewsRef, orderBy('createdAt','asc'), limit(1));
       const oldestSnap = await getDocs(oldestQ);
       oldestSnap.forEach(docSnap =>
@@ -91,9 +91,7 @@ export default function AddReviewForm({ onDone }) {
           disabled={submitting}
         >
           {[5,4,3,2,1].map((n) => (
-            <option key={n} value={n} style={fieldStyle}>
-              {n} ★
-            </option>
+            <option key={n} value={n}>{n} ★</option>
           ))}
         </select>
       </div>
