@@ -1,4 +1,3 @@
-// src/components/ContactForm.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import servicesList from "../data/services";
@@ -6,7 +5,8 @@ import servicesList from "../data/services";
 export default function ContactForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const passedService = location.state?.service || "";
+  const passedService = location.state?.service ?? "";
+  const passedReferred = location.state?.referred ?? "no";
 
   const [form, setForm] = useState({
     name: "",
@@ -14,7 +14,7 @@ export default function ContactForm() {
     date: "",
     service: passedService,
     otherService: "",
-    referred: "no",
+    referred: passedReferred,
     referrer: "",
     message: ""
   });
@@ -31,19 +31,12 @@ export default function ContactForm() {
     setSubmitted(true);
   };
 
-  // clear referrer if switched to "no"
+  // clear referrer if switched back to "no"
   useEffect(() => {
     if (form.referred === "no" && form.referrer) {
       setForm((f) => ({ ...f, referrer: "" }));
     }
   }, [form.referred]);
-
-  // If passedService changes (unlikely), update form.service
-  useEffect(() => {
-    if (passedService && passedService !== form.service) {
-      setForm((f) => ({ ...f, service: passedService }));
-    }
-  }, [passedService]);
 
   if (submitted) {
     return (
@@ -154,6 +147,12 @@ export default function ContactForm() {
                       {s.name}
                     </option>
                   ))}
+                  <option
+                    value="Monthly Maintenance"
+                    style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
+                  >
+                    Monthly Maintenance
+                  </option>
                   <option
                     value="Other"
                     style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}

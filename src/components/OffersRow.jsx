@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const offersDetail = [
   {
@@ -47,12 +48,24 @@ const offersDetail = [
 export default function OffersRow() {
   const [modalIdx, setModalIdx] = useState(null);
   const modalRef = useRef();
+  const navigate = useNavigate();
 
   const closeModal = () => setModalIdx(null);
-
-  // Close modal on background click
   const handleModalBgClick = (e) => {
     if (e.target === modalRef.current) closeModal();
+  };
+
+  const handleBookNow = (index) => {
+    const state = {};
+    if (index === 0) {
+      // prefill Monthly Maintenance for the 50% Off offer
+      state.service = "Monthly Maintenance";
+    }
+    if (index === 2) {
+      // precheck "referred" for the Refer-a-Friend offer
+      state.referred = "yes";
+    }
+    navigate("/contact", { state });
   };
 
   return (
@@ -112,13 +125,13 @@ export default function OffersRow() {
             <h3 className="fw-bold mb-1">{offersDetail[modalIdx].title}</h3>
             <div className="mb-3 text-warning" style={{ fontWeight: 500 }}>{offersDetail[modalIdx].subtitle}</div>
             <div className="mb-3">{offersDetail[modalIdx].desc}</div>
-            <a
-              href="/contact"
+            <button
               className="btn btn-warning w-100"
               style={{ fontWeight: 600 }}
+              onClick={() => handleBookNow(modalIdx)}
             >
               Book Now
-            </a>
+            </button>
           </div>
         </div>
       )}
