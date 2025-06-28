@@ -142,7 +142,7 @@ export default function ServiceDetail() {
               {renderPricing()}
               <button
                 className="btn btn-warning btn-lg sd-book-btn"
-                onClick={() => {}}
+                onClick={() => navigate("/contact", { state: { service: svc.name } })}
               >
                 Book Now
               </button>
