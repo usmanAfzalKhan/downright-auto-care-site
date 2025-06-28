@@ -1,0 +1,35 @@
+.submission-success-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgba(18, 24, 43, 0.9);
+  border-radius: 12px;
+  color: #fff;
+  max-width: 90%;
+  margin: 2rem auto;
+  box-shadow: 0 0 16px rgba(0,0,0,0.3);
+}
+
+.spinning-wheel {
+  width: 80px;
+  height: 80px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.success-message {
+  font-size: 1.1rem;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 0.8s ease-out forwards 0.5s;
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}

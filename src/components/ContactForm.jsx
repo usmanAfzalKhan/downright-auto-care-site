@@ -1,6 +1,8 @@
+// src/components/ContactForm.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import servicesList from "../data/services";
+import SubmissionSuccess from "./SubmissionSuccess";
 
 export default function ContactForm() {
   const navigate = useNavigate();
@@ -20,33 +22,42 @@ export default function ContactForm() {
   });
   const [submitted, setSubmitted] = useState(false);
 
+  const formatPhoneNumber = (value) => {
+    const digits = value.replace(/\D/g, "");
+    return digits.length === 10
+      ? `${digits.slice(0,3)}-${digits.slice(3,6)}-${digits.slice(6)}`
+      : value;
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
+    if (name === "phone") {
+      setForm((f) => ({ ...f, phone: value.replace(/\D/g, "") }));
+    } else {
+      setForm((f) => ({ ...f, [name]: value }));
+    }
+  };
+
+  const handleBlur = (e) => {
+    const { name, value } = e.target;
+    if (name === "phone") {
+      setForm((f) => ({ ...f, phone: formatPhoneNumber(value) }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: send to your backend/email service
+    setForm((f) => ({ ...f, phone: formatPhoneNumber(f.phone) }));
     setSubmitted(true);
   };
 
-  // clear referrer if switched back to "no"
   useEffect(() => {
     if (form.referred === "no" && form.referrer) {
       setForm((f) => ({ ...f, referrer: "" }));
     }
   }, [form.referred]);
 
-  if (submitted) {
-    return (
-      <div className="container py-5">
-        <div className="alert alert-success text-center">
-          Thanks! We have your request and will be in touch shortly.
-        </div>
-      </div>
-    );
-  }
+  const today = new Date().toISOString().split('T')[0];
 
   const fieldStyle = {
     backgroundColor: "#1a2032",
@@ -63,6 +74,7 @@ export default function ContactForm() {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleSubmit} className="text-start">
+
               {/* Name */}
               <div className="mb-3">
                 <label className="form-label text-white">
@@ -86,22 +98,21 @@ export default function ContactForm() {
                   Phone Number<span className="text-danger">*</span>
                 </label>
                 <div className="input-group">
-                  <span
-                    className="input-group-text"
-                    style={{ ...fieldStyle, borderRight: "0" }}
-                  >
+                  <span className="input-group-text" style={{ ...fieldStyle, borderRight: "0" }}>
                     +1
                   </span>
                   <input
                     className="form-control"
-                    type="tel"
+                    type="text"
                     name="phone"
                     value={form.phone}
                     onChange={handleChange}
-                    placeholder="416-555-1234"
-                    pattern="\d{3}-\d{3}-\d{4}"
+                    onBlur={handleBlur}
+                    placeholder="647-745-2016"
+                    inputMode="numeric"
                     required
                     style={{ ...fieldStyle, borderLeft: "0" }}
+                    disabled={submitted}
                   />
                 </div>
               </div>
@@ -117,8 +128,11 @@ export default function ContactForm() {
                   name="date"
                   value={form.date}
                   onChange={handleChange}
+                  onBlur={handleBlur}
+                  min={today}
                   required
                   style={fieldStyle}
+                  disabled={submitted}
                 />
               </div>
 
@@ -134,29 +148,20 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   style={fieldStyle}
+                  disabled={submitted}
                 >
                   <option value="" disabled style={placeholderStyle}>
                     Select a service...
                   </option>
                   {servicesList.map((s) => (
-                    <option
-                      key={s.slug}
-                      value={s.name}
-                      style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
-                    >
+                    <option key={s.slug} value={s.name} style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
                       {s.name}
                     </option>
                   ))}
-                  <option
-                    value="Monthly Maintenance"
-                    style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
-                  >
+                  <option value="Monthly Maintenance" style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
                     Monthly Maintenance
                   </option>
-                  <option
-                    value="Other"
-                    style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
-                  >
+                  <option value="Other" style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
                     Other
                   </option>
                 </select>
@@ -175,6 +180,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     style={fieldStyle}
+                    disabled={submitted}
                   />
                 </div>
               )}
@@ -195,10 +201,9 @@ export default function ContactForm() {
                       checked={form.referred === "yes"}
                       onChange={handleChange}
                       style={{ filter: "invert(1)" }}
+                      disabled={submitted}
                     />
-                    <label htmlFor="refYes" className="form-check-label text-white">
-                      Yes
-                    </label>
+                    <label htmlFor="refYes" className="form-check-label text-white">Yes</label>
                   </div>
                   <div className="form-check form-check-inline">
                     <input
@@ -210,19 +215,16 @@ export default function ContactForm() {
                       checked={form.referred === "no"}
                       onChange={handleChange}
                       style={{ filter: "invert(1)" }}
+                      disabled={submitted}
                     />
-                    <label htmlFor="refNo" className="form-check-label text-white">
-                      No
-                    </label>
+                    <label htmlFor="refNo" className="form-check-label text-white">No</label>
                   </div>
                 </div>
               </div>
 
               {form.referred === "yes" && (
                 <div className="mb-3">
-                  <label className="form-label text-white">
-                    Referrer’s Name<span className="text-danger">*</span>
-                  </label>
+                  <label className="form-label text-white">Referrer’s Name<span className="text-danger">*</span></label>
                   <input
                     className="form-control"
                     type="text"
@@ -231,6 +233,7 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     style={fieldStyle}
+                    disabled={submitted}
                   />
                 </div>
               )}
@@ -245,13 +248,17 @@ export default function ContactForm() {
                   value={form.message}
                   onChange={handleChange}
                   style={fieldStyle}
+                  disabled={submitted}
                 />
               </div>
 
-              <button type="submit" className="btn btn-outline-warning btn-lg">
+              <button type="submit" className="btn btn-outline-warning btn-lg" disabled={submitted}>
                 Submit
               </button>
             </form>
+
+            {/* Success message under form */}
+            {submitted && <SubmissionSuccess />}    
           </div>
         </div>
       </div>
