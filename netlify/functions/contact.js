@@ -1,20 +1,30 @@
 // netlify/functions/contact.js
-import { Handler } from "@netlify/functions";
 import sgMail from "@sendgrid/mail";
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const handler = async (event, context) => {
+export async function handler(event, context) {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      body: "Method Not Allowed"
+    };
   }
 
-  const data = JSON.parse(event.body);
+  let data;
+  try {
+    data = JSON.parse(event.body);
+  } catch (err) {
+    return {
+      statusCode: 400,
+      body: "Invalid JSON"
+    };
+  }
 
   const msg = {
-    to: "downrightautocare@gmail.com",       // your client’s inbox
-    from: "downrightautocare@gmail.com",     // your verified sender
-    subject: "New Booking Request",
+    to: "downrightautocare@gmail.com",     // client’s inbox
+    from: "downrightautocare@gmail.com",   // verified sender
+    subject: "📅 New Booking Request",
     html: `
       <h2>New Booking Request</h2>
       <ul>
@@ -25,16 +35,20 @@ const handler = async (event, context) => {
         <li><strong>Referred:</strong> ${data.referred}${data.referred === "yes" ? ` by ${data.referrer}` : ""}</li>
         <li><strong>Message:</strong> ${data.message || "—"}</li>
       </ul>
-    `,
+    `
   };
 
   try {
     await sgMail.send(msg);
-    return { statusCode: 200, body: JSON.stringify({ ok: true }) };
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ ok: true })
+    };
   } catch (err) {
-    console.error(err);
-    return { statusCode: 500, body: JSON.stringify({ error: "Email failed" }) };
+    console.error("SendGrid error:", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Email failed to send" })
+    };
   }
-};
-
-export { handler };
+}
