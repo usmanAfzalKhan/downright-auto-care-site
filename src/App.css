@@ -697,19 +697,25 @@ header,
 }
 
 /* ─────────────────────────────────────────── */
-/* Button & Link Hover Pop                   */
+/* Keep the header & its menu on top of all fades */
 /* ─────────────────────────────────────────── */
-button,
-.btn,
-a.nav-link,
-.footer a {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+header {
+  position: relative;
+  z-index: 1000;    /* lift it above the fading slides */
 }
 
-button:hover,
-.btn:hover,
-a.nav-link:hover,
-.footer a:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+/* Don’t apply the fadeInUp to header (so your hamburger never slides under) */
+header,
+header * {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ─────────────────────────────────────────── */
+/* Tame button hover (optional)               */
+/* ─────────────────────────────────────────── */
+button,
+.btn {
+  transition: background-color 0.2s ease, color 0.2s ease; /* only color fades, no position jumps */
 }
