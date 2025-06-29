@@ -13,15 +13,15 @@ export default function Owner() {
             margin: "0 0 0 auto", // push left on desktop, center on mobile
           }}
         >
-          <h2 className="mb-3" style={{ fontWeight: 700 }}>Meet Muhammad Raqueeb</h2>
+          <h2 className="mb-3" style={{ fontWeight: 700 }}>Meet Mohammed Raqueeb</h2>
           <p style={{ fontSize: "1.1rem", lineHeight: 1.7 }}>
-            Muhammad Raqueeb brings an unmatched level of care and expertise to every project at Downright Auto Care. With years of experience and a genuine passion for automotive excellence, he approaches every detail job with precision and pride. Clients appreciate his integrity, warm approach, and his commitment to exceeding expectations—whether it’s a basic wash or a complete restoration. Muhammad’s dedication to quality, eco-friendly solutions, and personal service has earned the trust of drivers who want their vehicles to look and feel brand new. Each car that leaves Downright Auto Care reflects his belief in honest work and meticulous attention to detail.
+            Mohammed Raqueeb brings an unmatched level of care and expertise to every project at Downright Auto Care. With years of experience and a genuine passion for automotive excellence, he approaches every detail job with precision and pride. Clients appreciate his integrity, warm approach, and his commitment to exceeding expectations—whether it’s a basic wash or a complete restoration. Mohammed’s dedication to quality, eco-friendly solutions, and personal service has earned the trust of drivers who want their vehicles to look and feel brand new. Each car that leaves Downright Auto Care reflects his belief in honest work and meticulous attention to detail.
           </p>
         </div>
         {/* Owner image (right on desktop, centered on mobile) */}
         <img
           src="/images/owner.jpeg"
-          alt="Muhammad Raqueeb"
+          alt="Mohammed Raqueeb"
           className="owner-img mb-4 mb-md-0 ms-md-5"
           style={{
             width: 210,
