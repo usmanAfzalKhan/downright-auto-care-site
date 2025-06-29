@@ -1,0 +1,21 @@
+.offers-row .offer-details {
+  max-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+
+  /* hint the browser about exactly what’s going to change */
+  will-change: max-height, margin-top, padding-top;
+
+  /* group all three into one smooth transition */
+  transition:
+    max-height 0.4s ease,
+    margin-top 0.4s ease,
+    padding-top 0.4s ease;
+}
+
+.offers-row .offer-card.expanded .offer-details {
+  max-height: 500px;   /* whatever fits your content */
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+}
