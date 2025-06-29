@@ -719,3 +719,13 @@ button,
 .btn {
   transition: background-color 0.2s ease, color 0.2s ease; /* only color fades, no position jumps */
 }
+
+/* ─────────────────────────────────────────── */
+/* Center Owner text on desktop only         */
+/* ─────────────────────────────────────────── */
+@media (min-width: 768px) {
+  .about-owner .owner-info {
+    margin: 0 auto !important;
+    text-align: center; /* ensure the text itself is centered */
+  }
+}
