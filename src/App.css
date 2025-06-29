@@ -660,3 +660,56 @@ header .navbar {
   border: 1.6px solid #FFD600;
 }
 
+/* ─────────────────────────────────────────── */
+/* Global Fade-Up Reveal on Load              */
+/* ─────────────────────────────────────────── */
+
+/* Apply to key layout elements */
+.container,
+.card,
+.service-card,
+.slide,
+footer,
+header,
+.review-list > div {
+  opacity: 0;
+  transform: translateY(15px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger delays (optional) */
+.container { animation-delay: 0.1s; }
+.card       { animation-delay: 0.2s; }
+.service-card { animation-delay: 0.3s; }
+.slide      { animation-delay: 0.1s; }
+.review-list > div { animation-delay: 0.2s; }
+
+/* The keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─────────────────────────────────────────── */
+/* Button & Link Hover Pop                   */
+/* ─────────────────────────────────────────── */
+button,
+.btn,
+a.nav-link,
+.footer a {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+.btn:hover,
+a.nav-link:hover,
+.footer a:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
