@@ -128,7 +128,7 @@ export default function ContactForm() {
                     value={form.phone}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="647-745-2016"
+                    placeholder="647-855-3456"
                     inputMode="numeric"
                     required
                     style={{ ...fieldStyle, borderLeft: "0" }}
