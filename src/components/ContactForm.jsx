@@ -47,8 +47,22 @@ export default function ContactForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setForm((f) => ({ ...f, phone: formatPhoneNumber(f.phone) }));
-    setSubmitted(true);
+    try {
+      const res = await fetch("/.netlify/functions/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        console.error("Email API error", await res.text());
+        alert("Something went wrong. Please try again later.");
+      }
+    } catch (err) {
+      console.error("Network error", err);
+      alert("Network error. Please try again later.");
+    }
   };
 
   useEffect(() => {
@@ -57,15 +71,19 @@ export default function ContactForm() {
     }
   }, [form.referred]);
 
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
 
   const fieldStyle = {
     backgroundColor: "#1a2032",
     color: "#e1e8f0",
     border: "1px solid #444",
-    borderRadius: "4px"
+    borderRadius: "4px",
   };
   const placeholderStyle = { color: "#777" };
+
+  if (submitted) {
+    return <SubmissionSuccess />;
+  }
 
   return (
     <section className="contact-form py-5">
@@ -74,7 +92,6 @@ export default function ContactForm() {
         <div className="row justify-content-center">
           <div className="col-md-6">
             <form onSubmit={handleSubmit} className="text-start">
-
               {/* Name */}
               <div className="mb-3">
                 <label className="form-label text-white">
@@ -98,7 +115,10 @@ export default function ContactForm() {
                   Phone Number<span className="text-danger">*</span>
                 </label>
                 <div className="input-group">
-                  <span className="input-group-text" style={{ ...fieldStyle, borderRight: "0" }}>
+                  <span
+                    className="input-group-text"
+                    style={{ ...fieldStyle, borderRight: "0" }}
+                  >
                     +1
                   </span>
                   <input
@@ -112,7 +132,6 @@ export default function ContactForm() {
                     inputMode="numeric"
                     required
                     style={{ ...fieldStyle, borderLeft: "0" }}
-                    disabled={submitted}
                   />
                 </div>
               </div>
@@ -128,11 +147,9 @@ export default function ContactForm() {
                   name="date"
                   value={form.date}
                   onChange={handleChange}
-                  onBlur={handleBlur}
                   min={today}
                   required
                   style={fieldStyle}
-                  disabled={submitted}
                 />
               </div>
 
@@ -148,20 +165,29 @@ export default function ContactForm() {
                   onChange={handleChange}
                   required
                   style={fieldStyle}
-                  disabled={submitted}
                 >
                   <option value="" disabled style={placeholderStyle}>
                     Select a service...
                   </option>
                   {servicesList.map((s) => (
-                    <option key={s.slug} value={s.name} style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
+                    <option
+                      key={s.slug}
+                      value={s.name}
+                      style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
+                    >
                       {s.name}
                     </option>
                   ))}
-                  <option value="Monthly Maintenance" style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
+                  <option
+                    value="Monthly Maintenance"
+                    style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
+                  >
                     Monthly Maintenance
                   </option>
-                  <option value="Other" style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}>
+                  <option
+                    value="Other"
+                    style={{ backgroundColor: "#1a2032", color: "#e1e8f0" }}
+                  >
                     Other
                   </option>
                 </select>
@@ -180,7 +206,6 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     style={fieldStyle}
-                    disabled={submitted}
                   />
                 </div>
               )}
@@ -201,9 +226,13 @@ export default function ContactForm() {
                       checked={form.referred === "yes"}
                       onChange={handleChange}
                       style={{ filter: "invert(1)" }}
-                      disabled={submitted}
                     />
-                    <label htmlFor="refYes" className="form-check-label text-white">Yes</label>
+                    <label
+                      htmlFor="refYes"
+                      className="form-check-label text-white"
+                    >
+                      Yes
+                    </label>
                   </div>
                   <div className="form-check form-check-inline">
                     <input
@@ -215,16 +244,22 @@ export default function ContactForm() {
                       checked={form.referred === "no"}
                       onChange={handleChange}
                       style={{ filter: "invert(1)" }}
-                      disabled={submitted}
                     />
-                    <label htmlFor="refNo" className="form-check-label text-white">No</label>
+                    <label
+                      htmlFor="refNo"
+                      className="form-check-label text-white"
+                    >
+                      No
+                    </label>
                   </div>
                 </div>
               </div>
 
               {form.referred === "yes" && (
                 <div className="mb-3">
-                  <label className="form-label text-white">Referrer’s Name<span className="text-danger">*</span></label>
+                  <label className="form-label text-white">
+                    Referrer’s Name<span className="text-danger">*</span>
+                  </label>
                   <input
                     className="form-control"
                     type="text"
@@ -233,14 +268,15 @@ export default function ContactForm() {
                     onChange={handleChange}
                     required
                     style={fieldStyle}
-                    disabled={submitted}
                   />
                 </div>
               )}
 
               {/* Message */}
               <div className="mb-3">
-                <label className="form-label text-white">Additional Message</label>
+                <label className="form-label text-white">
+                  Additional Message
+                </label>
                 <textarea
                   className="form-control"
                   name="message"
@@ -248,17 +284,18 @@ export default function ContactForm() {
                   value={form.message}
                   onChange={handleChange}
                   style={fieldStyle}
-                  disabled={submitted}
                 />
               </div>
 
-              <button type="submit" className="btn btn-outline-warning btn-lg" disabled={submitted}>
+              <button
+                type="submit"
+                className="btn btn-outline-warning btn-lg"
+              >
                 Submit
               </button>
             </form>
 
-            {/* Success message under form */}
-            {submitted && <SubmissionSuccess />}    
+            {submitted && <SubmissionSuccess />}
           </div>
         </div>
       </div>
