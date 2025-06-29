@@ -80,14 +80,14 @@ export default function HeroSlider() {
         onClick={() => setIndex((prev) => (prev - 1 + slides.length) % slides.length)}
         aria-label="Previous slide"
       >
-        &#8592;
+        {"<"}
       </button>
       <button
         className="slider-btn right"
         onClick={() => setIndex((prev) => (prev + 1) % slides.length)}
         aria-label="Next slide"
       >
-        &#8594;
+        {">"}
       </button>
       <div
         className="slides"
